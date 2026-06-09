@@ -56,3 +56,24 @@ def individual(request, id):
     data=database.objects.get(id=id)
     jews=database_serializer(data)
     return Response(jews.data)
+
+
+def entry(request):
+    return render(request, 'entry.html')
+
+
+@api_view(['POST','GET'])
+def ent(request):
+    if request.method=="POST":
+        jeasus=database_serializer(data=request.POST)
+
+        if jeasus.is_valid():
+            jeasus.save()
+            return Response(jeasus.data)
+    
+    else:
+        databa=database.objects.all()
+        america=database_serializer(databa, many=True)
+        return Response(america.data)
+
+    return Response(jeasus.errors)

@@ -5,6 +5,7 @@
 {% block content %}
 
 <form action="{% url "reg" %}" type="POST">
+    {% csrf_token %}
     <label>Name: <input type="text" name="name"></label>
     <label>Password: <input type="password" name="pass"></label>
     <button type="submit">register</button>

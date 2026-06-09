@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 
-def login(request):
+def login_view(request):
     return render(request, 'login.html')
 
 def log(request):
@@ -44,9 +44,11 @@ def registration(request):
     return render(request, 'register.html')
 
 @login_required
+@api_view(['GET'])
 def home(request):
     datab=database.objects.all()
-    return render(request, "home.html", {'data':datab })
+    israel=database_serializer(datab, many=True)
+    return Response(israel.data)
 
 @login_required
 @api_view(['GET'])
